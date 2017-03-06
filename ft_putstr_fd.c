@@ -6,7 +6,7 @@
 /*   By: opodolia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/04 16:26:30 by opodolia          #+#    #+#             */
-/*   Updated: 2016/12/04 21:11:26 by opodolia         ###   ########.fr       */
+/*   Updated: 2017/02/03 13:57:12 by opodolia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void	ft_putstr_fd(char const *s, int fd)
 {
-	if (s && fd)
-		write(fd, s, ft_strlen(s));
+	while (s && fd)
+		ft_putchar_fd(*s++, fd);
 }

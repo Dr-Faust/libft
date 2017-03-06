@@ -1,60 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_uitoa_base.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: opodolia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/03 19:37:54 by opodolia          #+#    #+#             */
-/*   Updated: 2016/12/10 17:54:33 by opodolia         ###   ########.fr       */
+/*   Created: 2017/03/04 16:43:00 by opodolia          #+#    #+#             */
+/*   Updated: 2017/03/04 16:43:01 by opodolia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	ft_size(intmax_t nb)
+static	int		ft_size(uintmax_t val, int base)
 {
-	size_t	size;
+	int		size;
 
-	size = 0;
-	if (nb == 0)
+	if (val == 0)
 		return (1);
-	if (nb < 0)
+	size = 0;
+	while (val)
 	{
-		nb = -nb;
+		val /= base;
 		size++;
-	}
-	while (nb > 0)
-	{
-		size++;
-		nb /= 10;
 	}
 	return (size);
 }
 
-char			*ft_itoa(intmax_t n)
+char			*ft_uitoa_base(uintmax_t val, int base)
 {
-	intmax_t	nb;
-	char		*str;
-	size_t		size;
+	char	*str;
+	char	*bs;
+	int		size;
 
-	nb = n;
-	size = ft_size(nb);
-	str = ft_strnew(size);
-	if (str == 0)
-		return (0);
-	if (n == 0)
-		str = ft_strdup("0");
-	if (nb < 0)
+	bs = "0123456789ABCDEF";
+	size = ft_size(val, base);
+	str = (char *)malloc(sizeof(char) * (size + 1));
+	str[size] = '\0';
+	if (val == 0)
+		str[0] = '0';
+	while (val > 0)
 	{
-		str[0] = '-';
-		nb = -nb;
-	}
-	while (nb > 0 && str)
-	{
-		str[size - 1] = '0' + (nb % 10);
-		size--;
-		nb /= 10;
+		str[--size] = bs[val % base];
+		val /= base;
 	}
 	return (str);
 }

@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_wcslen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: opodolia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/30 19:35:55 by opodolia          #+#    #+#             */
-/*   Updated: 2016/11/30 19:57:39 by opodolia         ###   ########.fr       */
+/*   Created: 2017/03/04 16:41:31 by opodolia          #+#    #+#             */
+/*   Updated: 2017/03/04 16:41:33 by opodolia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+int		ft_wcslen(const wchar_t *s)
 {
-	char *str;
+	int		i;
+	int		len;
 
-	str = (char *)malloc(sizeof(*str) * ft_strlen(s1) + 1);
-	if (str != 0)
-		str = ft_strcpy(str, s1);
-	return (str);
+	i = -1;
+	len = 0;
+	while (s[++i])
+		len += ft_wclen(s[i]);
+	return (len);
 }

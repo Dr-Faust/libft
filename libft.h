@@ -6,7 +6,7 @@
 /*   By: opodolia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/06 15:10:35 by opodolia          #+#    #+#             */
-/*   Updated: 2017/02/02 19:20:40 by opodolia         ###   ########.fr       */
+/*   Updated: 2017/02/22 17:07:54 by opodolia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
+# include <stdint.h>
+# include <wchar.h>
 
 typedef struct		s_list
 {
@@ -31,6 +33,7 @@ void				*ft_memmove(void *dst, const void *src, size_t len);
 void				*ft_memchr(const void *s, int c, size_t n);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
 size_t				ft_strlen(const char *s);
+size_t				ft_strnlen(const char *s, size_t maxlen);
 char				*ft_strdup(const char *s1);
 char				*ft_strcpy(char *dst, const char *src);
 char				*ft_strncpy(char *dst, const char *src, size_t len);
@@ -67,7 +70,7 @@ char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
-char				*ft_itoa(int n);
+char				*ft_itoa(intmax_t n);
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);
 void				ft_putendl(char const *s);
@@ -86,6 +89,10 @@ void				ft_quicksort(int *arr, int first, int last);
 void				ft_swap(int *a, int *b);
 int					ft_lstsize(t_list *lst);
 int					ft_sqrt(int nb);
-char				*ft_itoa_base(int value, int base);
+char				*ft_uitoa_base(uintmax_t val, int base);
+int					ft_wclen(const wchar_t c);
+int					ft_wcslen(const wchar_t *s);
+int					ft_wctomb(char *s, wchar_t wchar);
+size_t				ft_wcstombs(char *s, const wchar_t *old_ws, size_t len);
 
 #endif

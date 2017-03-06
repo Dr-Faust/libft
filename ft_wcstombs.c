@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_wcstombs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: opodolia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/30 19:35:55 by opodolia          #+#    #+#             */
-/*   Updated: 2016/11/30 19:57:39 by opodolia         ###   ########.fr       */
+/*   Created: 2017/03/04 16:41:49 by opodolia          #+#    #+#             */
+/*   Updated: 2017/03/04 16:41:50 by opodolia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+size_t	ft_wcstombs(char *s, const wchar_t *old_ws, size_t len)
 {
-	char *str;
+	size_t	src;
+	size_t	dest;
 
-	str = (char *)malloc(sizeof(*str) * ft_strlen(s1) + 1);
-	if (str != 0)
-		str = ft_strcpy(str, s1);
-	return (str);
+	src = 0;
+	dest = 0;
+	while (dest < len - 1)
+		dest += (ft_wctomb(&s[dest], old_ws[src++]));
+	s[dest] = '\0';
+	return (dest);
 }
