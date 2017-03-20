@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
+/*   ft_uitoa_base.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: exam <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: opodolia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/31 10:01:33 by exam              #+#    #+#             */
-/*   Updated: 2017/02/02 19:23:40 by opodolia         ###   ########.fr       */
+/*   Created: 2017/03/04 16:43:00 by opodolia          #+#    #+#             */
+/*   Updated: 2017/03/14 15:30:03 by opodolia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-static	int		ft_size(long val, int base)
+static int	ft_size(uintmax_t val, int base)
 {
 	int		size;
 
-	size = 1;
-	if (val < 0 && base == 10)
-		size++;
-	val = (val < 0) ? -val : val;
-	while (val >= base)
+	if (val == 0)
+		return (1);
+	size = 0;
+	while (val)
 	{
 		val /= base;
 		size++;
@@ -28,19 +27,16 @@ static	int		ft_size(long val, int base)
 	return (size);
 }
 
-char			*ft_itoa_base(int value, int base)
+char		*ft_uitoa_base(uintmax_t val, int base, char c)
 {
 	char	*str;
 	char	*bs;
-	long	val;
 	int		size;
 
-	bs = "0123456789ABCDEF";
-	val = value;
+	bs = (c <= 'Z') ? "0123456789ABCDEF" : "0123456789abcdef";
 	size = ft_size(val, base);
 	str = (char *)malloc(sizeof(char) * (size + 1));
 	str[size] = '\0';
-	val = (val < 0) ? -val : val;
 	if (val == 0)
 		str[0] = '0';
 	while (val > 0)
@@ -48,6 +44,5 @@ char			*ft_itoa_base(int value, int base)
 		str[--size] = bs[val % base];
 		val /= base;
 	}
-	str[0] = (str[0]) ? str[0] : '-';
 	return (str);
 }
